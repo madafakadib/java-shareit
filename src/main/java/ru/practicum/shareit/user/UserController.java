@@ -1,12 +1,20 @@
 package ru.practicum.shareit.user;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * TODO Sprint add-controllers.
  */
+
 @RestController
 @RequestMapping(path = "/users")
 public class UserController {
+    @GetMapping
+    public List<User> findAllUsers() {
+        return userService.findAllUsers();
+    }
 }
