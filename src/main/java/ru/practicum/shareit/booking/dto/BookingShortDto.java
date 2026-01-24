@@ -13,10 +13,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingDto {
-    Long id;
+public class BookingShortDto {
     Long itemId;
     LocalDateTime start;
     LocalDateTime end;
-    Status status;
 }
