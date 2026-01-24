@@ -6,15 +6,15 @@ public class BookingMapper {
     public static BookingShortDto toBookingShortDto(Booking booking) {
         return BookingShortDto.builder()
                 .itemId(booking.getItem().getId())
-                .start(booking.getStartDate())
-                .end(booking.getEndDate())
+                .start(booking.getStart())
+                .end(booking.getEnd())
                 .build();
     }
 
     public static Booking toBooking(BookingShortDto bookingShortDto) {
         return Booking.builder()
-                .startDate(bookingShortDto.getStart())
-                .endDate((bookingShortDto.getEnd()))
+                .start(bookingShortDto.getStart())
+                .end((bookingShortDto.getEnd()))
                 .build();
     }
 
@@ -22,8 +22,8 @@ public class BookingMapper {
         return BookingDto.builder()
                 .id(booking.getId())
                 .itemId(booking.getItem().getId())
-                .start(booking.getStartDate())
-                .end(booking.getEndDate())
+                .start(booking.getStart())
+                .end(booking.getEnd())
                 .status(booking.getStatus())
                 .build();
     }

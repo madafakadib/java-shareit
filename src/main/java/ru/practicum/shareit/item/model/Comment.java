@@ -5,7 +5,7 @@ import lombok.*;
 import ru.practicum.shareit.user.model.User;
 
 @Entity
-@Table(name = "items")
+@Table(name = "comments")
 @Getter
 @Setter
 @Builder
@@ -21,9 +21,11 @@ public class Comment {
     @Column(name = "text")
     String text;
 
-    @Column(name = "item_id")
+    @ManyToOne
+    @JoinColumn(name = "item_id")
     Item item;
 
-    @Column(name = "author_id")
+    @ManyToOne
+    @JoinColumn(name = "author_id")
     User author;
 }
