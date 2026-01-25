@@ -115,7 +115,7 @@ public class ItemServiceImpl implements ItemService {
                 item.setAvailable(itemDto.getAvailable());
             }
         } else {
-            throw new ValidationException("Вы не являетесь владельцем вещи");
+            throw new NotFoundException("Вы не являетесь владельцем вещи");
         }
 
         itemRepository.save(item);
@@ -148,6 +148,7 @@ public class ItemServiceImpl implements ItemService {
         comment.setText(text);
         comment.setItem(item);
         comment.setAuthor(user);
+        comment.setCreated(LocalDateTime.now());
         commentRepository.save(comment);
         return CommentMapper.toCommentDto(comment);
     }

@@ -44,9 +44,9 @@ public class ItemController {
 
     @PostMapping("/{itemId}/comment")
     public CommentDto saveComment(@PathVariable Long itemId,
-                                  @RequestBody String text,
+                                  @RequestBody CommentDto text,
                                   @RequestHeader(Headers.USER_ID) Long userId) {
-        return itemService.saveComment(itemId, text, userId);
+        return itemService.saveComment(itemId, text.getText(), userId);
     }
 
     @GetMapping("/search")

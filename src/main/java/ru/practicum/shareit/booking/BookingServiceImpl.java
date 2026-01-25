@@ -8,6 +8,7 @@ import ru.practicum.shareit.booking.dto.BookingShortDto;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.State;
 import ru.practicum.shareit.booking.model.Status;
+import ru.practicum.shareit.exception.IternalServerException;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.item.ItemRepository;
@@ -106,7 +107,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto updateBookingStatus(Long bookingId, Long userId, Boolean approve) {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new NotFoundException("Бронирование по id " + bookingId + " не найдено"));
         if (!booking.getItem().getOwner().getId().equals(userId)) {
-            throw new NotFoundException("Изменять статус может только владелец вещи");
+            throw new IternalServerException("Изменять статус может только владелец вещи");
         }
         if (booking.getStatus().equals(Status.APPROVED)) {
             throw new ValidationException("Бронирование уже подтверждено");

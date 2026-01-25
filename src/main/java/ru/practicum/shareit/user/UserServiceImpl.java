@@ -3,6 +3,7 @@ package ru.practicum.shareit.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.DuplicateException;
+import ru.practicum.shareit.exception.IternalServerException;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.user.dto.UserDto;
@@ -45,8 +46,8 @@ public class UserServiceImpl implements UserService {
         if (!userDto.getEmail().contains("@")) {
             throw new ValidationException("Неверно введен email");
         }
-        userRepository.save(UserMapper.toUser(userDto));
-        return userDto;
+        User user = userRepository.save(UserMapper.toUser(userDto));
+        return UserMapper.toUserDto(user);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
         }
         if (userDto.getEmail() != null) {
             if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-                throw new ValidationException("Этот email уже используется");
+                throw new IternalServerException("Этот email уже используется");
             }
             user.setEmail(userDto.getEmail());
         }

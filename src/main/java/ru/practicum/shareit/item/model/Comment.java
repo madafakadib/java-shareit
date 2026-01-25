@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import ru.practicum.shareit.user.model.User;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "comments")
 @Getter
@@ -28,4 +30,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "author_id")
     User author;
+
+    @Column(name = "created")
+    LocalDateTime created;
 }

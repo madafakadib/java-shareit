@@ -27,4 +27,10 @@ public class ErrorHandler {
     public Map<String, String> handleValidationException(final DuplicateException e) {
         return Map.of("conflict", e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, String> handlerIternalServerError(final IternalServerException e) {
+        return Map.of("iternalServerError", e.getMessage());
+    }
 }
