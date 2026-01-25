@@ -32,11 +32,10 @@ public class UserController {
         return userService.saveUser(userDto);
     }
 
-    //TODO узнать как работает patch
     @PatchMapping("/{id}")
     public UserDto updateUser(@RequestBody UserDto userDto,
                               @PathVariable Long id) {
-        return userService.updateUser(id,userDto);
+        return userService.updateUser(id, userDto);
     }
 
     @DeleteMapping("/{id}")
