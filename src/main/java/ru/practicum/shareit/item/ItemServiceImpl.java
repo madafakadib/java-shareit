@@ -126,9 +126,7 @@ public class ItemServiceImpl implements ItemService {
         if (text == null || text.isBlank()) {
             return Collections.emptyList();
         }
-        Boolean available = true;
-        return itemRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndAndAvailable(text,
-                text, available).stream().map(ItemMapper::toItemDto).toList();
+        return itemRepository.search(text).stream().map(ItemMapper::toItemDto).toList();
     }
 
     @Override
