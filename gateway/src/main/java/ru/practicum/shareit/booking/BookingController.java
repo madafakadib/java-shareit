@@ -29,7 +29,6 @@ public class BookingController {
                                               @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
 		BookingState state = BookingState.from(stateParam)
 				.orElseThrow(() -> new IllegalArgumentException("Unknown state: " + stateParam));
-		log.info("Get booking with state {}, userId={}, from={}, size={}", stateParam, userId, from, size);
 		return bookingClient.getBookings(userId, state, from, size);
 	}
 
@@ -46,14 +45,11 @@ public class BookingController {
 	@PostMapping
 	public ResponseEntity<Object> bookItem(@RequestHeader("X-Sharer-User-Id") long userId,
                                            @RequestBody @Valid BookItemRequestDto requestDto) {
-		log.info("Creating booking {}, userId={}", requestDto, userId);
 		return bookingClient.bookItem(userId, requestDto);
 	}
-
 	@GetMapping("/{bookingId}")
 	public ResponseEntity<Object> getBooking(@RequestHeader("X-Sharer-User-Id") long userId,
                                              @PathVariable Long bookingId) {
-		log.info("Get booking {}, userId={}", bookingId, userId);
 		return bookingClient.getBooking(userId, bookingId);
 	}
 
