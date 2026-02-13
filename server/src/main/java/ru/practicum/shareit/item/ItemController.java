@@ -3,14 +3,12 @@ package ru.practicum.shareit.item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.item.dto.CommentDto;
+import ru.practicum.shareit.item.dto.CommentShortDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.utils.Headers;
 
 import java.util.List;
 
-/**
- * TODO Sprint add-controllers.
- */
 @RestController
 @RequestMapping("/items")
 public class ItemController {
@@ -44,9 +42,9 @@ public class ItemController {
 
     @PostMapping("/{itemId}/comment")
     public CommentDto saveComment(@PathVariable Long itemId,
-                                  @RequestBody CommentDto text,
+                                  @RequestBody CommentShortDto commentShortDto,
                                   @RequestHeader(Headers.USER_ID) Long userId) {
-        return itemService.saveComment(itemId, text.getText(), userId);
+        return itemService.saveComment(itemId, commentShortDto, userId);
     }
 
     @GetMapping("/search")
